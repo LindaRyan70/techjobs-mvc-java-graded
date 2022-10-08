@@ -12,6 +12,40 @@
 
     <!-- TODO #1 - Use a loop to display job results in a table. -->
 
+<!-- Task 2, Part 1: Display List of Jobs - Used attribute 'jobs' to loop, found in listJobsByColumnAndValue()
+in ListController.java file. Used class="job-listing" to apply unique styles.css formatting per directions above
+ copied from book, and created tables for each. -->
+
+    <table class="job-listing" th:each="job : ${jobs}"> <!-- Attribute 'jobs' from listJobsByColumnAndValue() in ListController.java file.   -->
+<!--  NOTE:  <tbody>  TestTaskTwo - testJobListingDisplaysAllJobFields() failed until I removed this tag from w/in <table> tags.
+        Took a lot of debugging to discover that the html tag elements had to match the exact elements/tags the test expected.-->
+            <tr>
+                <td>ID</td>
+                <td th:text="${job.id}"></td>  <!-- (job of jobs) above is Job type, so access to Job.java class fields directly. -->
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td th:text="${job.name}"></td>
+            </tr>
+            <tr>
+                <td>Employer</td>
+                <td th:text="${job.employer}"></td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td th:text="${job.location}"></td>
+            </tr>
+            <tr>
+                <td>Position Type</td>
+                <td th:text="${job.positionType}"></td>
+            </tr>
+            <tr>
+                <td>Skill</td>
+                <td th:text="${job.coreCompetency}"></td>
+            </tr>
+    </table>
+
+
 </div>
 
 </body>
