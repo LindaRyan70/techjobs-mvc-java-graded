@@ -57,11 +57,11 @@ public class ListController {
         ArrayList<Job> jobs;
 
 //   Task 2, Part 2: Add 'View All' Link to the 'All' column on the /list 'View Jobs By Category' page from list.html file.
-//  Used 'all' from column.equals('all') below for the key when I added a key/value pair to tableChoices in ListController() above.
+//  Used this 'all' from column.equals('all') below for the key when I added a key/value pair to tableChoices in ListController() above.
         if (column.equals("all")){
 
             jobs = JobData.findAll();
-            model.addAttribute("title", "All Jobs");
+            model.addAttribute("title", "All Jobs: ");
         } else {
             jobs = JobData.findByColumnAndValue(column, value);
             model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
