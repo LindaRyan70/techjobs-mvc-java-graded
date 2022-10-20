@@ -45,9 +45,11 @@ public class SearchController {
         }
 
         model.addAttribute("columns", columnChoices);   // Create 'columns' attribute for use in search.html <span> tage column : columns.
-//        model.addAttribute("searchType", searchType);     // Don't think I need this. Works fine without it.
-//        model.addAttribute("searchTerm", searchTerm);     // Don't think I need this. Works fine without it.
         model.addAttribute("jobs", jobs);   // Create 'jobs' attribute to use in search.html to print job info.
+
+//  BONUS 1a/1b: Needed to add model attributes here in order to reference these in the search.html template to keep search fields populated with most recent entries.  //
+        model.addAttribute("searchType", searchType);  // Needed for Bonus 1a - keeping search fields populated (check box).
+        model.addAttribute("searchTerm", searchTerm);  // Needed for Bonus 1b - keeping search fields populated (keyword entry).
 
         return "search";
     }

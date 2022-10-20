@@ -20,7 +20,13 @@
                         name="searchType"
                         th:id="${column.key}"
                         th:value="${column.key}"
-                        th:checked="${column.key == 'all'}"/>
+                        th:checked="${column.key == searchType}"/>
+<!-- BONUS 1a: Modify the view template to keep the previous search field selected when displaying the results.
+            I replaced the th:checked line below with the one above to keep the checked box on the selected searchType. -->
+<!--    th:checked="${column.key == 'all'}"/>-->  <!-- This starter code had radio checkbox return to All when clicked. -->
+
+<!-- NOTE: I found this code in my research, onclick="history.go(-1);",  but it just reloaded previous search/list page.  -->
+
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
 
@@ -28,7 +34,10 @@
 
         <p>
             <label for="searchTerm">Keyword:</label>
-            <input type="text" name="searchTerm" id="searchTerm" />
+<!--            <input type="text" name="searchTerm" id="searchTerm"/>-->
+<!-- BONUS 1b: I modified the starter input line above with line below by adding th:value to keep search box field populated w/ most recent entry. -->
+            <input type="text" name="searchTerm" id="searchTerm" th:value="${searchTerm}"/>
+
         </p>
 
         <input type="submit" value="Search" />
@@ -69,7 +78,9 @@
 <!--    </table>-->
 
 <!--    Task 4 EXTRA - Created a fragment called 'job-results' in the list-jobs.html file <table> tag. Then used
- th:replace here to utilize same display code, such that the above code is unnecessary/redundant. -->
+ th:replace here to utilize same display code, such that the above code is unnecessary/redundant. I would have put the
+ fragment into the fragments.html file, and use th:replace in the list-jobs.html file as well, but the book said to do
+ it in list-jobs.html file, so I did. -->
     <p th:replace="list-jobs :: job-results"></p>
 
 </div>

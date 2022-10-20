@@ -16,37 +16,67 @@
 in ListController.java file. Used class="job-listing" to apply unique styles.css formatting per directions above
  copied from book, and created tables for each. -->
 
-<!--  Task 4 EXTRA - Created a fragment called 'job-results' in <table> tag below. Then used th:replace in <table> tag
- on search.html to utilize same display code. 'jobs' attribute comes from ListController (listJobsByColAndVal() method.-->
-    <!--        <table class="job-listing" th:each="job : ${jobs}">-->
-    <table th:fragment="job-results" class="job-listing" th:each="job : ${jobs}">
-
 <!--  NOTE:  <tbody>  TestTaskTwo - testJobListingDisplaysAllJobFields() failed until I removed this tag from w/in <table> tags.
         Took a lot of debugging to discover that the html tag elements had to match the exact elements/tags the test expected.-->
 
+<!--  BONUS 2:  I added  th:text="${#strings.toUpperCase('Id') + ':'}" to all first-child <td> tags. I also added
+                style="font-style: italic"  to all last-child <td> tags. I could have just added styling to the CSS file
+                but the book wanted it to be completed withing the template file. Since this is a fragment, all this
+                applies to the search.html display of search results, as well.-->
+
+<!--  BONUS 3: In the tables of the job results, make each value (except name) hyperlinked to a new listing of all jobs with that same value.
+             I removed/commented out the original <td>Employer</td> line and replaced it with a <td><a th:href=></a></td> code block for each <tr>. -->
+
+<!--  Task 4 EXTRA/Tip - Created a fragment called 'job-results' in <table> tag below. Then used th:replace in <table> tag
+            on search.html to utilize same display code. 'jobs' attribute comes from ListController (listJobsByColAndVal() method.
+            I could likely just put this directly in the fragments.html file and then put the th:replace here like the search.html file,
+            but the book said to put the fragment in this file, so I did. -->
+
+        <!--        <table class="job-listing" th:each="job : ${jobs}">-->
+        <table th:fragment="job-results" class="job-listing" th:each="job : ${jobs}">
             <tr>
-                <td>ID</td>
-                <td th:text="${job.id}"></td>  <!-- (job of jobs) above is Job type, so access to Job.java class fields directly. -->
+                <td th:text="${#strings.toUpperCase('Id') + ':'}">ID</td>
+                <!--  (job of jobs) is Job type (from the ArrayList<Job> jobs  in ListController),
+                so can access Job.java file class fields directly (job.name, etc.). -->
+                <!--  I also made the ID's be red. -->
+<!--                <td style="font-style: italic; color: red" th:text="${job.id}"></td> -->
+                <td>
+                    <a style="font-style: italic; color: red" th:href="@{/list/jobs(column=all)}" th:text="${job.id}"></a>
+                </td>
             </tr>
             <tr>
-                <td>Name</td>
-                <td th:text="${job.name}"></td>
+                <td th:text="${#strings.toUpperCase('Name') + ':'}">Name</td>
+                <td style="font-style: italic" th:text="${job.name}"></td>
             </tr>
             <tr>
-                <td>Employer</td>
-                <td th:text="${job.employer}"></td>
+                <td th:text="${#strings.toUpperCase('Employer' + ':')}">Employer</td>
+<!--                <td style="font-style: italic" th:text="${job.employer}"></td>-->
+<!--    Bonus 3 First Failed Attempt: The line below was my first attempt, but realized it had syntax/punctuation errors. -->
+<!--                <a th:href="@{/list/jobs(column=${employer},value=${job.employer}" th:text="${job.employer}"></a>-->
+                <td>
+                    <a style="font-style: italic" th:href="@{/list/jobs(column=employer,value=${job.employer})}" th:text="${job.employer}"></a>
+                </td>
             </tr>
             <tr>
-                <td>Location</td>
-                <td th:text="${job.location}"></td>
+                <td th:text="${#strings.toUpperCase('Location' + ':')}">Location</td>
+<!--                <td style="font-style: italic" th:text="${job.location}"></td>-->
+                <td>
+                    <a style="font-style: italic" th:href="@{/list/jobs(column=location,value=${job.location})}" th:text="${job.location}"></a>
+                </td>
             </tr>
             <tr>
-                <td>Position Type</td>
-                <td th:text="${job.positionType}"></td>
+                <td th:text="${#strings.toUpperCase('Position Type' + ':')}">Position Type</td>
+<!--                <td style="font-style: italic" th:text="${job.positionType}"></td>-->
+                <td>
+                    <a style="font-style: italic" th:href="@{/list/jobs(column=positionType,value=${job.positionType})}" th:text="${job.positionType}"></a>
+                </td>
             </tr>
             <tr>
-                <td>Skill</td>
-                <td th:text="${job.coreCompetency}"></td>
+                <td th:text="${#strings.toUpperCase('Skill' + ':')}">Skill</td>
+<!--                <td style="font-style: italic" th:text="${job.coreCompetency}"></td>-->
+                <td>
+                    <a style="font-style: italic" th:href="@{/list/jobs(column=coreCompetency,value=${job.coreCompetency})}" th:text="${job.coreCompetency}"></a>
+                </td>
             </tr>
     </table>
 
