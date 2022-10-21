@@ -50,16 +50,18 @@ public class TestTaskTwo {
     /*
     * Looking at the first job table only, verify that all job fields are listed
     * */
+
+    /*  NOTE:  In order to complete BONUS MISSION 3, I had to add <a> tag as    /a    in 5 of the 6 test lines below.  */
     @Test
     public void testJobListingDisplaysAllJobFields () throws Exception {
         mockMvc.perform(get("/list/jobs?column=coreCompetency&value=Ruby"))
                 .andExpect(status().isOk())
-                .andExpect(xpath("//table[contains(@class, 'job-listing')][1]/tr/td[contains(text(), '3')]").exists())
+                .andExpect(xpath("//table[contains(@class, 'job-listing')][1]/tr/td/a[contains(text(), '3')]").exists())
                 .andExpect(xpath("//table[contains(@class, 'job-listing')][1]/tr/td[contains(text(), 'Junior Web Developer')]").exists())
-                .andExpect(xpath("//table[contains(@class, 'job-listing')][1]/tr/td[contains(text(), 'Cozy')]").exists())
-                .andExpect(xpath("//table[contains(@class, 'job-listing')][1]/tr/td[contains(text(), 'Portland')]").exists())
-                .andExpect(xpath("//table[contains(@class, 'job-listing')][1]/tr/td[contains(text(), 'Web - Front End')]").exists())
-                .andExpect(xpath("//table[contains(@class, 'job-listing')][1]/tr/td[contains(text(), 'Ruby')]").exists());
+                .andExpect(xpath("//table[contains(@class, 'job-listing')][1]/tr/td/a[contains(text(), 'Cozy')]").exists())
+                .andExpect(xpath("//table[contains(@class, 'job-listing')][1]/tr/td/a[contains(text(), 'Portland')]").exists())
+                .andExpect(xpath("//table[contains(@class, 'job-listing')][1]/tr/td/a[contains(text(), 'Web - Front End')]").exists())
+                .andExpect(xpath("//table[contains(@class, 'job-listing')][1]/tr/td/a[contains(text(), 'Ruby')]").exists());
     }
 
     /*

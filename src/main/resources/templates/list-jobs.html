@@ -13,33 +13,35 @@
     <!-- TODO #1 - Use a loop to display job results in a table. -->
 
 <!-- Task 2, Part 1: Display List of Jobs - Used attribute 'jobs' to loop, found in listJobsByColumnAndValue()
-in ListController.java file. Used class="job-listing" to apply unique styles.css formatting per directions above
- copied from book, and created tables for each. -->
+        in ListController.java file. Used class="job-listing" to apply unique styles.css formatting per directions above
+        copied from book, and created tables for each. -->
+
+    <!--    (job of jobs) is Job type (from ArrayList<Job> jobs in ListController), can access Job class fields directly (job.name, etc.). -->
 
 <!--  NOTE:  <tbody>  TestTaskTwo - testJobListingDisplaysAllJobFields() failed until I removed this tag from w/in <table> tags.
         Took a lot of debugging to discover that the html tag elements had to match the exact elements/tags the test expected.-->
 
 <!--  BONUS 2:  I added  th:text="${#strings.toUpperCase('Id') + ':'}" to all first-child <td> tags. I also added
-                style="font-style: italic"  to all last-child <td> tags. I could have just added styling to the CSS file
-                but the book wanted it to be completed withing the template file. Since this is a fragment, all this
-                applies to the search.html display of search results, as well.-->
+                style="font-style: italic"  to all last-child <td> tags. I also made the ID's red. I could have just
+                added styling to the CSS file but the book wanted it to be completed withing the template file. Since
+                this is a fragment, all this applies to the search.html display of search results, as well.  -->
 
-<!--  BONUS 3: In the tables of the job results, make each value (except name) hyperlinked to a new listing of all jobs with that same value.
-             I removed/commented out the original <td>Employer</td> line and replaced it with a <td><a th:href=></a></td> code block for each <tr>. -->
+<!-- BONUS 3: In the tables of the job results, make each value (except name) hyperlinked to a new listing of all jobs with that same value.
+            I removed/commented out the original <td>Employer</td> line and replaced i with a <td><a th:href=></a></td> code block for each <tr>.
+     **NOTE** Bonus 3 makes TestTaskTwo fail b/c does not allow for a link <a> tag. So, you have to add   /a  in the
+                TestTaskTwo.java testJobListingDisplaysAllJobFields() test expectation statements. -->
 
 <!--  Task 4 EXTRA/Tip - Created a fragment called 'job-results' in <table> tag below. Then used th:replace in <table> tag
             on search.html to utilize same display code. 'jobs' attribute comes from ListController (listJobsByColAndVal() method.
             I could likely just put this directly in the fragments.html file and then put the th:replace here like the search.html file,
             but the book said to put the fragment in this file, so I did. -->
 
-        <!--        <table class="job-listing" th:each="job : ${jobs}">-->
+<!--             <table class="job-listing" th:each="job : ${jobs}">-->
         <table th:fragment="job-results" class="job-listing" th:each="job : ${jobs}">
             <tr>
                 <td th:text="${#strings.toUpperCase('Id') + ':'}">ID</td>
-                <!--  (job of jobs) is Job type (from the ArrayList<Job> jobs  in ListController),
-                so can access Job.java file class fields directly (job.name, etc.). -->
-                <!--  I also made the ID's be red. -->
-<!--                <td style="font-style: italic; color: red" th:text="${job.id}"></td> -->
+<!--  Bonus 3 - I replaced <td style > tag below with the <td><a style> code block to create a hyperlink for the job.id value. -->
+<!--                <td style="font-style: italic; color: red" th:text="${job.id}"></td>-->
                 <td>
                     <a style="font-style: italic; color: red" th:href="@{/list/jobs(column=all)}" th:text="${job.id}"></a>
                 </td>
@@ -50,15 +52,15 @@ in ListController.java file. Used class="job-listing" to apply unique styles.css
             </tr>
             <tr>
                 <td th:text="${#strings.toUpperCase('Employer' + ':')}">Employer</td>
+<!--  Bonus 3 - I replaced <td style > tag below with the <td><a style> code block to create a hyperlink for the job.id value. -->
 <!--                <td style="font-style: italic" th:text="${job.employer}"></td>-->
-<!--    Bonus 3 First Failed Attempt: The line below was my first attempt, but realized it had syntax/punctuation errors. -->
-<!--                <a th:href="@{/list/jobs(column=${employer},value=${job.employer}" th:text="${job.employer}"></a>-->
                 <td>
                     <a style="font-style: italic" th:href="@{/list/jobs(column=employer,value=${job.employer})}" th:text="${job.employer}"></a>
                 </td>
             </tr>
             <tr>
                 <td th:text="${#strings.toUpperCase('Location' + ':')}">Location</td>
+<!-- Bonus 3 - I replaced <td style > tag below with the <td><a style> code block to create a hyperlink for the job.id value. -->
 <!--                <td style="font-style: italic" th:text="${job.location}"></td>-->
                 <td>
                     <a style="font-style: italic" th:href="@{/list/jobs(column=location,value=${job.location})}" th:text="${job.location}"></a>
@@ -66,6 +68,7 @@ in ListController.java file. Used class="job-listing" to apply unique styles.css
             </tr>
             <tr>
                 <td th:text="${#strings.toUpperCase('Position Type' + ':')}">Position Type</td>
+<!-- Bonus 3 - I replaced <td style > tag below with the <td><a style> code block to create a hyperlink for the job.id value. -->
 <!--                <td style="font-style: italic" th:text="${job.positionType}"></td>-->
                 <td>
                     <a style="font-style: italic" th:href="@{/list/jobs(column=positionType,value=${job.positionType})}" th:text="${job.positionType}"></a>
@@ -73,6 +76,7 @@ in ListController.java file. Used class="job-listing" to apply unique styles.css
             </tr>
             <tr>
                 <td th:text="${#strings.toUpperCase('Skill' + ':')}">Skill</td>
+<!-- Bonus 3 - I replaced <td style > tag below with the <td><a style> code block to create a hyperlink for the job.id value. -->
 <!--                <td style="font-style: italic" th:text="${job.coreCompetency}"></td>-->
                 <td>
                     <a style="font-style: italic" th:href="@{/list/jobs(column=coreCompetency,value=${job.coreCompetency})}" th:text="${job.coreCompetency}"></a>

@@ -20,9 +20,10 @@
                         name="searchType"
                         th:id="${column.key}"
                         th:value="${column.key}"
-                        th:checked="${column.key == searchType}"/>
+                        th:checked="${column.key == searchType || column.key == 'all'}"/>
 <!-- BONUS 1a: Modify the view template to keep the previous search field selected when displaying the results.
-            I replaced the th:checked line below with the one above to keep the checked box on the selected searchType. -->
+            I replaced the th:checked line below with the one above to keep the checked box on the selected searchType.
+            I then had to add the  || column.key == 'all'  to ensure the page loaded with an initial default All selected.-->
 <!--    th:checked="${column.key == 'all'}"/>-->  <!-- This starter code had radio checkbox return to All when clicked. -->
 
 <!-- NOTE: I found this code in my research, onclick="history.go(-1);",  but it just reloaded previous search/list page.  -->
@@ -47,7 +48,21 @@
 
     <!-- TODO #4 - Loop over the search results to display all job fields. -->
 
-<!--Task 4 - Display Search Results -->
+    <!--    Task 4 EXTRA - Created a fragment called 'job-results' in the list-jobs.html file <table> tag. Then used
+     th:replace here to utilize same display code, such that the code further down is unnecessary/redundant. I would
+     have put the fragment into the fragments.html file, and use th:replace in the list-jobs.html file as well, but the
+      book said to do it in list-jobs.html file, so I did. -->
+    <p th:replace="list-jobs :: job-results"></p>
+
+</div>
+
+</body>
+</html>
+
+
+<!-- Code below was original work for Task 4 above, but when book said to make a fragment, I moved it down/commented it off.-->
+
+    <!--Task 4 - Display Search Results -->
 
 <!--    <table class="job-listing" th:each="job : ${jobs}"> &lt;!&ndash; Attribute 'jobs' from displaySearchResults() in SearchController.java file.   &ndash;&gt;-->
 <!--        &lt;!&ndash;  NOTE:  Reused list-jobs.html code I created for Task Two, per book directions. &ndash;&gt;-->
@@ -76,14 +91,3 @@
 <!--            <td th:text="${job.coreCompetency}"></td>-->
 <!--        </tr>-->
 <!--    </table>-->
-
-<!--    Task 4 EXTRA - Created a fragment called 'job-results' in the list-jobs.html file <table> tag. Then used
- th:replace here to utilize same display code, such that the above code is unnecessary/redundant. I would have put the
- fragment into the fragments.html file, and use th:replace in the list-jobs.html file as well, but the book said to do
- it in list-jobs.html file, so I did. -->
-    <p th:replace="list-jobs :: job-results"></p>
-
-</div>
-
-</body>
-</html>
